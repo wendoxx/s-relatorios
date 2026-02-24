@@ -13,6 +13,27 @@ public class ProjectWorkService {
     @Autowired
     private ProjectWorkRepository projectWorkRepository;
 
+    public ProjectWorkResponseDTO createProjectWork(ProjectWorkRequestDTO requestDTO) {
+        ProjectWork projectWork = new ProjectWork();
+        projectWork.setName(requestDTO.name());
+        projectWork.setCode(requestDTO.code());
+        projectWork.setClient(requestDTO.client());
+        projectWork.setDescription(requestDTO.description());
+        ProjectWork savedProjectWork = projectWorkRepository.save(projectWork);
+        return convertProjectWorkToDTO(savedProjectWork);
+    }
+
+    public ProjectWorkResponseDTO updateProjectWork(ProjectWorkRequestDTO requestDTO) {
+        ProjectWork projectWork = projectWorkRepository.findById(requestDTO.id())
+                .orElseThrow(() -> new RuntimeException("ProjectWork not found"));
+        projectWork.setName(requestDTO.name());
+        projectWork.setCode(requestDTO.code());
+        projectWork.setClient(requestDTO.client());
+        projectWork.setDescription(requestDTO.description());
+        ProjectWork updatedProjectWork = projectWorkRepository.save(projectWork);
+        return convertProjectWorkToDTO(updatedProjectWork);
+    }
+
     public ProjectWorkResponseDTO getProjectWorkById(ProjectWorkRequestDTO requestDTO) {
         ProjectWork projectWork = projectWorkRepository.findById(requestDTO.id())
                 .orElseThrow(() -> new RuntimeException("ProjectWork not found"));
