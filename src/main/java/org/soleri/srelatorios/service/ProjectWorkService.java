@@ -7,6 +7,8 @@ import org.soleri.srelatorios.repository.ProjectWorkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectWorkService {
 
@@ -38,6 +40,13 @@ public class ProjectWorkService {
         ProjectWork projectWork = projectWorkRepository.findById(requestDTO.id())
                 .orElseThrow(() -> new RuntimeException("ProjectWork not found"));
         return convertProjectWorkToDTO(projectWork);
+    }
+
+    public List<ProjectWorkResponseDTO> getAllProjectWorks() {
+        List<ProjectWork> projectWorks = projectWorkRepository.findAll();
+        return projectWorks.stream()
+                .map(this::convertProjectWorkToDTO)
+                .toList();
     }
 
     public void deleteProjectWork(ProjectWorkRequestDTO requestDTO) {
