@@ -1,4 +1,6 @@
 package org.soleri.srelatorios.dto.request;
 
-public record ProjectWorkRequestDTO(String name, String code, String client, String description) {
+import java.util.UUID;
+
+public record ProjectWorkRequestDTO(UUID id, String name, String code, String client, String description) {
 }
