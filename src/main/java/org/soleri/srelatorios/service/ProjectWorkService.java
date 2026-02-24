@@ -40,6 +40,12 @@ public class ProjectWorkService {
         return convertProjectWorkToDTO(projectWork);
     }
 
+    public void deleteProjectWork(ProjectWorkRequestDTO requestDTO) {
+        ProjectWork projectWork = projectWorkRepository.findById(requestDTO.id())
+                .orElseThrow(() -> new RuntimeException("ProjectWork not found"));
+        projectWorkRepository.delete(projectWork);
+    }
+
     public ProjectWorkResponseDTO convertProjectWorkToDTO(ProjectWork projectWork) {
         return new ProjectWorkResponseDTO(
                 projectWork.getId(),
