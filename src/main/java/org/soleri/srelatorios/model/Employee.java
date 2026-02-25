@@ -2,6 +2,7 @@ package org.soleri.srelatorios.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.soleri.srelatorios.utils.enums.EmployeeRole;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "tb_employee")
+@NoArgsConstructor
 public class Employee implements Serializable {
 
     @Serial
